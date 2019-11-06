@@ -1,4 +1,11 @@
-const fs = require("fs"), axios = require("axios"), inquirer = require("inquirer"), dotenv = require("dotenv"), electron = require("electron"), electronHTML = require("electron-html-to"), open = require("open");
+const fs = require("fs")
+const axios = require("axios") 
+const inquirer = require("inquirer")
+const dotenv = require("dotenv")
+const electron = require("electron")
+const open = require("open")
+
+const writeFileAsync = util.promisify(fs.writeFile);
 
 
 const questions = [{
@@ -18,21 +25,12 @@ const questions = [{
     ]
 }];
 
-function writeToFile(fileName, data) {
+function generateHTML(fileName, data) {
 
+    // Git Hub 
+    //a. profile image
+    //b. username
+    //c.location/githubprofile/userblog
+    //d. user bio
+    //e. # of public repos/followers/stars/following
 }
-
-function init() {
-
-    init()
-};
-
-
-
-//what functions will i need?
-// 1. Git Hub 
-//a. profile image
-//b. username
-//c.location/githubprofile/userblog
-//d. user bio
-//e. # of public repos/followers/stars/following
