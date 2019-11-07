@@ -5,32 +5,41 @@ const dotenv = require("dotenv")
 const electron = require("electron")
 const open = require("open")
 
-const writeFileAsync = util.promisify(fs.writeFile);
-
-function promptUser(){
-    return inquirer.prompt([
-        {
-            type: "input",
-            name: "username",
-            message: "Enter your GitHub username: "
-        }
-    ]).then((response) => {
-        const queryURL = `https://api.github.com/users/${response.username}/repos?per_page=100`;
-
-        axios.get(queryURL).then((response) => {
-            
-        })
-    })
-}
+// const writeFileAsync = util.promisify(fs.writeFile);
+const profile = {}
+const questions = [{
+    type: "input",
+    name: "username",
+    message: "Enter your GitHub username: ";
+},
+{
+    type: "list",
+    name: "color",
+    message: "What is your favorite color?",
+    choices: ["green", "blue", "pink", "red"],
+}];
 
 async function init() {
-    try {
-        const data = await promptUser();
-        const html = generateHTML(data);
-        await writeFileAsync("profile.html", html);
-        console.log("successfully wrote to profile.html")
-    } catch (err) {
-        console.log(err);
-    }
+    inquirer
+        .prompt(questions)
+        .then((response) => {
+            const queryURL = `https://api.github.com/users/${response.username}`;
+            axios.get(queryURL).
+                then((response) => {
+                    profile.username = username;
+                    profile.image = response.data.avatar_url;
+                    profile.name = response.data.name;
+                    profile.location = response.data.location;
+                    profile.company = response.data.company;
+                    profile.gitUrl = response.data.html_url;
+                    profile.bio = response.data.bio;
+                    profile.repos = response.data.public_repos;
+                    profile.followers = response.data.followers;
+                    profile.following = response.data.following;
+
+                    axios.get(`https://api.github.com/users/${username}/starred`).then((response) => {
+                        profile.stars = response.data.length;
+                    })
+                })
+        })
 }
-init();
