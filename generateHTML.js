@@ -176,14 +176,14 @@ function generateHTML(data) {
         <body>
            <div class="wrapper">
               <div class="photo-header">
-                 <img src="https://avatars1.githubusercontent.com/u/15524827?v=4" alt="Photo of Tucker Beauchamp" />
+                 <img src="${data.avatar_url}" alt="Profile Picture" />
                  <h1>Hi!</h1>
                  <h2>
                  My name is ${data.name}</h1>
-                 <h5></h5>
+                 <h5>Currently @ ${data.company}</h5>
                  <nav class="links-nav">
-                    <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/Phoenix, AZ"><i class="fas fa-location-arrow"></i> Phoenix, AZ</a>
-                    <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://github.com/tuckerbeauchamp"><i class="fab fa-github-alt"></i> GitHub</a>
+                    <a class="nav-link" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/place/${data.location}"><i class="fas fa-location-arrow"></i> ${data.location}</a>
+                    <a class="nav-link" target="_blank" rel="noopener noreferrer" href="${data.html_url}"><i class="fab fa-github-alt"></i> GitHub</a>
                     
                  </nav>
               </div>
@@ -191,20 +191,20 @@ function generateHTML(data) {
                  <div class="container">
                  <div class="row">
                     <div class="col">
-                       <h3>I love code 💃 </h3>
+                       <h3>${data.bio}</h3>
                     </div>
                     </div>
                     <div class="row">
                     <div class="col">
                        <div class="card">
                          <h3>Public Repositories</h3>
-                         <h4>8</h4>
+                         <h4>${data.public_repos}</h4>
                        </div>
                     </div>
                      <div class="col">
                      <div class="card">
                        <h3>Followers</h3>
-                       <h4>20</h4>
+                       <h4>${data.followers}</h4>
                      </div>
                     </div>
                     </div>
@@ -212,13 +212,13 @@ function generateHTML(data) {
                     <div class="col">
                     <div class="card">
                        <h3>GitHub Stars</h3>
-                       <h4>0</h4>
+                       <h4>${data.stars}</h4>
                        </div>
                     </div>
                      <div class="col">
                      <div class="card">
                        <h3>Following</h3>
-                       <h4>15</h4>
+                       <h4>${data.following}</h4>
                        </div>
                     </div>
                     </div>
