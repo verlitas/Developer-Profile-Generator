@@ -28,31 +28,30 @@ function init() {
             const queryURL = `https://api.github.com/users/${username}`;
             const querlURLStar = `https://api.github.com/users/${username}/starred`
             axios.get(queryURL).
-                then(function ({data}) {
+                then(function ({ data }) {
                     axios.get(querlURLStar)
-                    .then(function(res) {
-                        const sCount = res.data.map(element => {
-                            return element.stargazers_count
-                        });
-                        const stars = sCount.length;
-                        const params = {
-                            color: color,
-                            username: data.username,
-                            avatar_url: data.avatar_url,
-                            name: data.name,
-                            location: data.location,
-                            bio: data.bio,
-                            public_repos: data.public_repos,
-                            followers: data.followers,
-                            following: data.following,
-                            github: data.login,
-                            stars: stars,
-                        }
-                        pdf.create(generateHTML(params)).toFile('./devportfolio.pdf', function(err, res) {
-                            if (err) throw (err);
-
+                        .then(function (res) {
+                            const sCount = res.data.map(element => {
+                                return element.stargazers_count
+                            });
+                            const stars = sCount.length;
+                            const params = {
+                                color: color,
+                                username: data.username,
+                                avatar_url: data.avatar_url,
+                                name: data.name,
+                                location: data.location,
+                                bio: data.bio,
+                                public_repos: data.public_repos,
+                                followers: data.followers,
+                                following: data.following,
+                                github: data.login,
+                                stars: stars,
+                            }
+                            pdf.create(generateHTML(params)).toFile('./devportfolio.pdf', function (err, res) {
+                                if (err) throw (err);
+                            })
                         })
-                    })
-                }
-
-                )})}
+                })
+        })
+}
